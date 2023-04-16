@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ToDoForm } from "./ToDoForm";
 import { v4 as uuidv4 } from "uuid";
 import { Todo } from "./Todo";
+import { EditToDoForm } from "./EditToDoForm";
 uuidv4();
 
 export const ToDoWrapper = () => {
@@ -14,13 +15,36 @@ export const ToDoWrapper = () => {
     ]);
   };
 
+  const toggleComplete = id =>{
+    setTodos(todos.map(todo => todo.id === id ? {
+      ...todo, completed: !todo.completed
+    } : todo))
+  }
+
+  const deleteTodo = id =>{
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
+
+  const editTodo = id => {
+    setTodos(todos.map(todo => todo.id === id ? {...todo, isEditing: !todo.isEditing} : todo))
+  }
+
+  const editTask = (task, id) =>{
+    setTodos(todos.map(todo => todo.id === id ?{
+      ...todo, task, isEditing: !todo.isEditing
+    } : todo))
+  }
+
   return (
     <div className="text-center">
-        <h1 className="mt-6">Get things done!</h1>
+        <h1 className="my-6 uppercase font-bold text-5xl">Get things done!</h1>
       <ToDoForm addTodo={addTodo}></ToDoForm>
       {todos.map((todo, index) => (
-        <Todo task={todo} key={index}></Todo>
-      ))}
+        todo.isEditing ?(
+          <EditToDoForm editTodo={editTask} task={todo}></EditToDoForm>
+        ) : (
+        <Todo task={todo} key={index} toggleComplete={toggleComplete} deleteTodo={deleteTodo} editTodo={editTodo}></Todo>
+      )))}
     </div>
   );
 };

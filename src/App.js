@@ -1,14 +1,10 @@
 import { ToDoWrapper } from "./components/ToDoWrapper";
 
-
 function App() {
   return (
-   
-   <main className="">
-   <ToDoWrapper></ToDoWrapper>
- 
-    </main>
-   
+    <div className="mt-20">
+      <ToDoWrapper></ToDoWrapper>
+    </div>
   );
 }
 
