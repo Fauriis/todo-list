@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 
 export const Todo = ({ task, toggleComplete, deleteTodo, editTodo }) => {
   return (
-    <div className="flex flex-row gap-3 mt-6 items-center justify-center bg-pink-200 shadow-lg w-1/3 lg:ml-96 ml-48">
+    <div className="flex flex-row gap-3 mt-6 items-center justify-center bg-pink-200 shadow-lg w-1/3 lg:ml-96 ml-24">
       
       <p
         onClick={() => toggleComplete(task.id)}
